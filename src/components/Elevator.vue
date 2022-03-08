@@ -1,14 +1,35 @@
 <script setup>
+  import { storeToRefs, mapActions } from "pinia";
   import { ELEVATOR_MAX_LEVELS } from "../ElevatorConfig";
+  import { useLevelStore } from "../stores/useLevel.js";
+
+  const main = useLevelStore();
+
+  const { elevatorLevel, elevatorCallArray } = storeToRefs(main);
+
+  const { elevatorCall } = mapActions(useLevelStore, ["elevatorCall"]);
+  main.$subscribe((_mutation, state) => {
+    setInterval(() => {
+      if (state.elevatorCallArray[0] && state.elevatorMoving === false) {
+        main.moveElevator(state.elevatorCallArray[0]);
+      }
+    }, 1000);
+  });
 </script>
 
 <template>
   <div class="wrapper" v-for="level in ELEVATOR_MAX_LEVELS" :key="level.id">
     <div class="level">
-      <span v-show="currentLevel">Кабина</span>
+      <span v-if="elevatorLevel === level"><div class="elevator"></div></span>
+      <span v-else span><div class="elevator elevator-offline"></div></span>
       <div class="level_wrapper">
         <span class="level__number">{{ level }}</span>
-        <span class="level__btn"></span>
+        <span v-if="elevatorCallArray.every((e) => e !== level)">
+          <span class="level__btn" @click="elevatorCall(level)"></span>
+        </span>
+        <span v-else>
+          <span class="level__btn level__btn-offline"></span>
+        </span>
       </div>
     </div>
   </div>
