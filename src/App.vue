@@ -4,7 +4,9 @@
 
 <template>
   <main>
-    <House />
+    <Transition>
+      <House />
+    </Transition>
   </main>
 </template>
 
