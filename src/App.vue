@@ -1,5 +1,5 @@
 <script setup>
-  import House from "./components/House.vue";
+  import House from "./container/House.vue";
 </script>
 
 <template>

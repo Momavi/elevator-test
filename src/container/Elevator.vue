@@ -1,7 +1,7 @@
 <script setup>
   import { storeToRefs } from "pinia";
-  import ElevatorBtn from "./ElevatorBtn.vue";
-  import ElevatorCabin from "./ElevatorCabin.vue";
+  import ElevatorBtn from "../components/ElevatorBtn.vue";
+  import ElevatorCabin from "../components/ElevatorCabin.vue";
   import { ELEVATOR_MAX_LEVELS } from "../ElevatorConfig";
   import { useLevelStore } from "../stores/useLevel.js";
 
