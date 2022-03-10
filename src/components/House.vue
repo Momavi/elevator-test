@@ -15,5 +15,7 @@
     border-radius: 2rem;
     width: 200px;
     color: white;
+    display: flex;
+    flex-direction: column-reverse;
   }
 </style>
